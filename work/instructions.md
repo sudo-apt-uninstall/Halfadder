@@ -78,22 +78,6 @@ Genus PPA reports are written under:
 
 The report set includes power, area, timing, gate count, and QoR reports. Keep Genus reports separate from Innovus reports; Innovus reports must be placed under `../reports/innovus/`.
 
-## Step 3 — Gate-Level Netlist Verification with Xcelium
-
-Verify the Genus-synthesized netlist using Xcelium from inside `work/`. Use the same testbench that was used for RTL simulation, but replace the RTL design source with the synthesized netlist.
-
-Run:
-
-```bash
-xrun ../netlist/halfadder_netlist.v ../rtl/halfadder_tb.v -v ../rtl/library/slow.v -access +rwc -timescale 1ns/1ps -gui
-```
-
-The `-timescale 1ns/1ps` option explicitly sets the simulation time unit and precision for the post-synthesis verification run. The `slow.v` library model is supplied with `-v` for gate-level cell simulation, following the established netlist-verification command pattern in the project's reference flow.
-
-This step checks that the synthesized gate-level implementation can be compiled, elaborated, and simulated with the existing testbench. Compare the gate-level simulation behavior against the RTL simulation results to confirm functional equivalence for the exercised test cases.
-
-Do not treat successful compilation alone as functional verification; inspect the simulation output and waveform behavior for the expected `sum` and `carry` responses.
-
 ## Cleanup
 
 Do not blindly delete `work/`. Intermediate databases may be required for continuing or debugging a Cadence run. Remove generated data only when its provenance and whether it is still needed are understood.
