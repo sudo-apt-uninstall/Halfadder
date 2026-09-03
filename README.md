@@ -2,7 +2,7 @@
 
 This repository contains the implementation and physical-design flow for a 1-bit half adder.
 
-Its organization combines the useful conventions from `counter4bitsync-private` with the more explicit implementation-stage separation used by `Sourav365/RTL-to-GDS-Flow-of-an-8-Bit-ALU/alu_design`.
+The repository is organized around clear separation between RTL, constraints, scripts, technology collateral, synthesis outputs, physical-design outputs, reports, and execution workspaces.
 
 ## Repository structure
 
@@ -18,11 +18,27 @@ Its organization combines the useful conventions from `counter4bitsync-private` 
 
 ## Flow organization
 
-The ALU reference separates implementation data into stage-specific areas such as `constraints/`, `genus/`, `innovus/`, `lef_files/`, `lib/`, `rtl/`, and `tcl/`. This repository keeps the same conceptual separation while using the broader `netlist/`, `reports/`, `outputs/`, `results/`, and `work/` convention already established in the counter project. fileciteturn23file0L2-L2
+The flow uses explicit implementation-stage separation so that source RTL, constraints, scripts, technology-dependent inputs, generated netlists, reports, and physical-design artifacts are not mixed together.
 
-Genus scripts follow the reference pattern of setting the library/HDL search paths, reading RTL, elaborating the top, reading SDC constraints, synthesizing to a mapped design, generating timing/cell/power/area reports, and writing mapped Verilog, SDC, and SDF outputs. fileciteturn25file0L2-L2
+The intended progression is:
 
-Commands should be launched from the intended flow/execution directory so relative paths remain stable across the Tcl scripts and generated artifacts. The counter project similarly documents `work/` as its execution location. fileciteturn3file0L2-L2
+```text
+RTL
+ ↓
+Constraints
+ ↓
+Synthesis
+ ↓
+Mapped Netlist
+ ↓
+Physical Design
+ ↓
+Implementation / Signoff Artifacts
+```
+
+Genus scripts are organized around the standard synthesis sequence of configuring library and HDL search paths, reading RTL, elaborating the top module, reading SDC constraints, synthesizing to a mapped design, generating timing/cell/power/area reports, and writing mapped Verilog, SDC, and SDF outputs.
+
+Commands should be launched from the intended flow/execution directory so relative paths remain stable across the Tcl scripts and generated artifacts.
 
 ## Current design
 
