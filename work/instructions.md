@@ -85,8 +85,10 @@ Verify the Genus-synthesized netlist using Xcelium from inside `work/`. Use the 
 Run:
 
 ```bash
-xrun ../netlist/halfadder_netlist.v ../rtl/halfadder_tb.v -access +rwc -gui
+xrun ../netlist/halfadder_netlist.v ../rtl/halfadder_tb.v -v ../rtl/library/slow.v -access +rwc -timescale 1ns/1ps -gui
 ```
+
+The `-timescale 1ns/1ps` option explicitly sets the simulation time unit and precision for the post-synthesis verification run. The `slow.v` library model is supplied with `-v` for gate-level cell simulation, following the established netlist-verification command pattern in the project's reference flow.
 
 This step checks that the synthesized gate-level implementation can be compiled, elaborated, and simulated with the existing testbench. Compare the gate-level simulation behavior against the RTL simulation results to confirm functional equivalence for the exercised test cases.
 
