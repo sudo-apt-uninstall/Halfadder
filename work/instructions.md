@@ -32,6 +32,22 @@ Before running a flow:
 6. Verify the installed Cadence/tool version.
 7. Use project-relative paths where practical so the flow remains reproducible.
 
+## Step 1 — RTL Simulation with Xcelium
+
+The first flow step is to compile, elaborate, and simulate the RTL using Xcelium `xrun` from inside `work/`.
+
+Run:
+
+```bash
+xrun ../rtl/halfadder.v ../rtl/halfadder_tb.v -access +rwc -gui
+```
+
+The command follows the execution-directory and relative-path convention used in the project's prior Xcelium flow: RTL sources are referenced as `../rtl/...` from `work/`, and `-access +rwc` is used for waveform/debug visibility.
+
+Do not add coverage options to the initial command unless coverage is specifically required. First establish a clean RTL compile/elaboration/simulation run.
+
+After a successful run, retain the Xcelium-generated execution data under `work/` as appropriate. Do not manually edit Xcelium-generated files such as `xrun.history` or files under `xcelium.d/` unless debugging requires it.
+
 ## Cleanup
 
 Do not blindly delete `work/`. Intermediate databases may be required for continuing or debugging a Cadence run. Remove generated data only when its provenance and whether it is still needed are understood.
