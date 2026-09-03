@@ -32,6 +32,12 @@ Before running a flow:
 6. Verify the installed Cadence/tool version.
 7. Use project-relative paths where practical so the flow remains reproducible.
 
+## Terminal / Working Directory Rule
+
+**Before Step 1, open a terminal directly from the repository's `work/` folder. Execute the flow commands from `work/` only.**
+
+The commands in these instructions assume the current working directory is `work/`. Do not run them from the repository root, `rtl/`, or another directory unless the command is explicitly rewritten for that execution directory.
+
 ## Step 1 — RTL Simulation with Xcelium
 
 The first flow step is to compile, elaborate, and simulate the RTL using Xcelium `xrun` from inside `work/`.
