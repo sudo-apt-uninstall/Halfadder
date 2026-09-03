@@ -40,9 +40,21 @@ The commands in these instructions assume the current working directory is `work
 
 ## Step 1 — RTL Simulation with Xcelium
 
-The first flow step is to compile, elaborate, and simulate the RTL using Xcelium `xrun` from inside `work/`.
+The first flow step is to compile, elaborate, verify all four Half Adder input combinations, and then launch the Xcelium GUI using `xrun` from inside `work/`.
 
-Run:
+### Testbench requirement
+
+The testbench must explicitly check all four input combinations against the expected `sum` and `carry` values. Each test case must be reported as `FAILED` if its outputs are incorrect. If all four test cases pass, the terminal must display:
+
+```text
+ALL TEST CASES TRUE
+```
+
+The simulation must complete the functional checks before the GUI is launched. Do not treat merely opening the GUI as evidence that the RTL passed verification.
+
+### Run
+
+From the `work/` directory, execute:
 
 ```bash
 xrun ../rtl/halfadder.v ../rtl/halfadder_tb.v -access +rwc -gui
