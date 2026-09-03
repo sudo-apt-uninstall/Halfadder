@@ -1,27 +1,33 @@
-# Genus synthesis script — Half Adder
-# Execute from work/ so paths remain relative to the execution workspace.
+# Setting library and RTL paths
+set_db / .init_lib_search_path /home/cadence/FOUNDRY/digital/90nm/dig/lib
+set_db / .init_hdl_search_path {../rtl}
+set REPORT_PATH   ../reports
 
-set rtl_dir ../rtl
-set constraints_dir ../contraints
-set netlist_dir ../netlist
-set reports_dir ../reports
-
-file mkdir $netlist_dir
-file mkdir $reports_dir
-
-read_hdl [glob $rtl_dir/half_adder.v]
-elaborate half_adder
-
-if {[llength [get_clocks *]] > 0} {
-    read_sdc $constraints_dir/half_adder.sdc
-}
-
+# Read Lib, RTL and SDC files
+set_db / .library "slow.lib"
+set DESIGN halfadder
+read_hdl "halfadder.v"
+elaborate $DESIGN
 check_design -unresolved
+read_sdc ../contraints/half_adder.sdc
+
+# Setting effort medium
+set_db syn_generic_effort medium
+set_db syn_map_effort medium
+set_db syn_opt_effort medium
+
 syn_generic
 syn_map
 syn_opt
 
-write_hdl > $netlist_dir/half_adder_netlist.v
-report_area > $reports_dir/half_adder_area.rpt
-report_timing > $reports_dir/half_adder_timing.rpt
-report_power > $reports_dir/half_adder_power.rpt
+write_hdl > ../netlist/halfadder_netlist.v
+write_sdc > ../contraints/halfadder_sdc.sdc
+
+# PPA Reports
+report_power > $REPORT_PATH/halfadder_power.rpt
+report_area > $REPORT_PATH/halfadder_area.rpt
+report_timing > $REPORT_PATH/halfadder_timing.rpt
+report_gates > $REPORT_PATH/halfadder_gatecount.rpt
+report_qor -levels_of_logic -power -exclude_constant_nets > $REPORT_PATH/halfadder_qor.rpt
+
+gui_show
