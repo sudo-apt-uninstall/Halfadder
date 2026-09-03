@@ -54,6 +54,30 @@ Do not add coverage options to the initial command unless coverage is specifical
 
 After a successful run, retain the Xcelium-generated execution data under `work/` as appropriate. Do not manually edit Xcelium-generated files such as `xrun.history` or files under `xcelium.d/` unless debugging requires it.
 
+## Step 2 — Genus Synthesis
+
+Run Cadence Genus from inside `work/` using the project synthesis Tcl script:
+
+```bash
+genus -files ../scripts/genus_script.tcl
+```
+
+The script reads `rtl/halfadder.v`, elaborates the `halfadder` design, reads `contraints/input_constraints.sdc`, performs generic synthesis, technology mapping, and optimization, then writes the synthesized netlist and post-synthesis constraints.
+
+The synthesized netlist is written to:
+
+```text
+../netlist/halfadder_netlist.v
+```
+
+Genus PPA reports are written under:
+
+```text
+../reports/genus/
+```
+
+The report set includes power, area, timing, gate count, and QoR reports. Keep Genus reports separate from Innovus reports; Innovus reports must be placed under `../reports/innovus/`.
+
 ## Cleanup
 
 Do not blindly delete `work/`. Intermediate databases may be required for continuing or debugging a Cadence run. Remove generated data only when its provenance and whether it is still needed are understood.
