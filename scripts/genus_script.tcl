@@ -1,7 +1,7 @@
 # Setting library and RTL paths
 set_db / .init_lib_search_path /home/cadence/FOUNDRY/digital/90nm/dig/lib
 set_db / .init_hdl_search_path {../rtl}
-set REPORT_PATH   ../reports
+set REPORT_PATH   ../reports/genus
 
 # Read Lib, RTL and SDC files
 set_db / .library "slow.lib"
