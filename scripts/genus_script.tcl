@@ -9,7 +9,7 @@ set DESIGN halfadder
 read_hdl "halfadder.v"
 elaborate $DESIGN
 check_design -unresolved
-read_sdc ../contraints/half_adder.sdc
+read_sdc ../contraints/input_constraints.sdc
 
 # Setting effort medium
 set_db syn_generic_effort medium
@@ -21,7 +21,7 @@ syn_map
 syn_opt
 
 write_hdl > ../netlist/halfadder_netlist.v
-write_sdc > ../contraints/halfadder_sdc.sdc
+write_sdc > ../contraints/post_synthesis_output_constraints.sdc
 
 # PPA Reports
 report_power > $REPORT_PATH/halfadder_power.rpt
