@@ -4,7 +4,7 @@
 create_rc_corner -name RC -cap_table {/home/cadence/FOUNDRY/digital/90nm/dig/captable/gpdk090.lef.extended.CapTbl} -preRoute_res {1.0} -preRoute_cap {1.0} -preRoute_clkres {0.0} -preRoute_clkcap {0.0} -postRoute_res {1.0} -postRoute_cap {1.0} -postRoute_xcap {1.0} -postRoute_clkres {0.0} -postRoute_clkcap {0.0} -qx_tech_file {/home/cadence/FOUNDRY/digital/90nm/dig/qrc/gpdk090_9l.tch}
 create_library_set -name SLOW -timing {/home/cadence/FOUNDRY/digital/90nm/dig/lib/slow.lib}
 create_library_set -name FAST -timing {/home/cadence/FOUNDRY/digital/90nm/dig/lib/fast.lib}
-create_constraint_mode -name CONST -sdc_files {/absolute/path/to/Halfadder/contraints/post_synthesis_output_constraints.sdc}
+create_constraint_mode -name CONST -sdc_files {../contraints/post_synthesis_output_constraints.sdc}
 create_delay_corner -name MAXDELAY -library_set {SLOW} -rc_corner {RC}
 create_delay_corner -name MINDELAY -library_set {FAST} -rc_corner {RC}
 create_analysis_view -name WORST -constraint_mode {CONST} -delay_corner {MAXDELAY}
